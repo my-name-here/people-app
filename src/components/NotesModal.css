@@ -1,0 +1,24 @@
+.notes-modal {
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  background: white;
+}
+
+.notes-modal h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.notes-content {
+  white-space: pre-wrap;
+  line-height: 1.6;
+  padding: 1.5rem;
+  background: #f5f5f5;
+  border-radius: 4px;
+  margin-top: 1rem;
+  max-height: calc(80vh - 100px);
+  overflow-y: auto;
+  color: #333;
+  border: 1px solid #e0e0e0;
+} 

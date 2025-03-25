@@ -1,0 +1,140 @@
+.group-detail {
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.group-detail h2 {
+  margin-bottom: 0.5rem;
+}
+
+.group-detail .description {
+  color: #7f8c8d;
+  margin-bottom: 2rem;
+}
+
+.members-section {
+  margin-top: 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.add-member-button {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.add-member-button:hover {
+  background-color: #27ae60;
+}
+
+.members-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.member-card {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.member-info h4 {
+  margin: 0 0 0.25rem 0;
+  color: #2c3e50;
+}
+
+.member-info .role {
+  color: #3498db;
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.member-info .organization {
+  color: #7f8c8d;
+  margin: 0.25rem 0 0 0;
+  font-size: 0.9rem;
+}
+
+.remove-member-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.remove-member-button:hover {
+  background-color: #c0392b;
+}
+
+.add-member-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.add-member-modal h3 {
+  margin: 0 0 1rem 0;
+  color: #2c3e50;
+}
+
+.available-persons {
+  display: grid;
+  gap: 1rem;
+}
+
+.person-option {
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.person-option:hover {
+  background: #e9ecef;
+}
+
+.person-option h4 {
+  margin: 0 0 0.25rem 0;
+  color: #2c3e50;
+}
+
+.person-option p {
+  margin: 0;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+} 

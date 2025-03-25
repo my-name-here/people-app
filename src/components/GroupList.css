@@ -1,0 +1,43 @@
+.group-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.group-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.group-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.group-card h3 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.group-card .description {
+  color: #7f8c8d;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.group-card .member-count {
+  color: #3498db;
+  font-weight: 500;
+  margin: 0.5rem 0;
+}
+
+.group-card .date-added {
+  color: #95a5a6;
+  font-size: 0.8rem;
+  margin: 0.5rem 0 0 0;
+} 
