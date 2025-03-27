@@ -10,6 +10,7 @@ import { PersonForm } from './components/PersonForm'
 import { GroupList } from './components/GroupList'
 import { GroupForm } from './components/GroupForm'
 import { GroupDetail } from './components/GroupDetail'
+import { Settings } from './components/Settings'
 import './App.css'
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
   const [isPersonFormOpen, setIsPersonFormOpen] = useState(false)
   const [isGroupFormOpen, setIsGroupFormOpen] = useState(false)
   const [selectedGroup, setSelectedGroup] = useState<Group | null>(null)
-  const [activeTab, setActiveTab] = useState<'people' | 'groups'>('people')
+  const [activeTab, setActiveTab] = useState<'people' | 'groups' | 'settings'>('people')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isRegistering, setIsRegistering] = useState(false)
@@ -134,7 +135,7 @@ function App() {
   };
 
   if (!user) {
-    return (
+  return (
       <div className="auth-container">
         <h2>{isRegistering ? 'Register' : 'Login'}</h2>
         {error && <div className="error-message">{error}</div>}
@@ -195,6 +196,12 @@ function App() {
         >
           Groups
         </button>
+        <button 
+          className={`tab-button ${activeTab === 'settings' ? 'active' : ''}`}
+          onClick={() => setActiveTab('settings')}
+        >
+          Settings
+        </button>
       </div>
 
       {selectedGroup ? (
@@ -218,6 +225,8 @@ function App() {
               </div>
               <GroupList groups={groups} onGroupSelect={handleGroupSelect} />
             </>
+          ) : activeTab === 'settings' ? (
+            <Settings people={persons} groups={groups} />
           ) : (
             <>
               <div className="section-header">
