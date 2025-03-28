@@ -11,6 +11,7 @@ import { GroupList } from './components/GroupList'
 import { GroupForm } from './components/GroupForm'
 import { GroupDetail } from './components/GroupDetail'
 import { Settings } from './components/Settings'
+import { ThemeProvider } from './contexts/ThemeContext'
 import './App.css'
 
 function App() {
@@ -175,96 +176,98 @@ function App() {
   }
 
   return (
-    <div className="app">
-      <header className="app-header">
-        <h1>Research People Tracker</h1>
-        <button onClick={handleLogout} className="logout-button">Logout</button>
-      </header>
+    <ThemeProvider>
+      <div className="app">
+        <header className="app-header">
+          <h1>Research People Tracker</h1>
+          <button onClick={handleLogout} className="logout-button">Logout</button>
+        </header>
 
-      {error && <div className="error-message">{error}</div>}
+        {error && <div className="error-message">{error}</div>}
 
-      <div className="tabs">
-        <button 
-          className={`tab-button ${activeTab === 'people' ? 'active' : ''}`}
-          onClick={() => setActiveTab('people')}
-        >
-          People
-        </button>
-        <button 
-          className={`tab-button ${activeTab === 'groups' ? 'active' : ''}`}
-          onClick={() => setActiveTab('groups')}
-        >
-          Groups
-        </button>
-        <button 
-          className={`tab-button ${activeTab === 'settings' ? 'active' : ''}`}
-          onClick={() => setActiveTab('settings')}
-        >
-          Settings
-        </button>
+        <div className="tabs">
+          <button 
+            className={`tab-button ${activeTab === 'people' ? 'active' : ''}`}
+            onClick={() => setActiveTab('people')}
+          >
+            People
+          </button>
+          <button 
+            className={`tab-button ${activeTab === 'groups' ? 'active' : ''}`}
+            onClick={() => setActiveTab('groups')}
+          >
+            Groups
+          </button>
+          <button 
+            className={`tab-button ${activeTab === 'settings' ? 'active' : ''}`}
+            onClick={() => setActiveTab('settings')}
+          >
+            Settings
+          </button>
+        </div>
+
+        {selectedGroup ? (
+          <GroupDetail 
+            group={selectedGroup} 
+            onClose={() => setSelectedGroup(null)}
+            onGroupUpdate={handleGroupUpdate}
+          />
+        ) : (
+          <>
+            {activeTab === 'groups' ? (
+              <>
+                <div className="section-header">
+                  <h2>Groups</h2>
+                  <button 
+                    className="add-button"
+                    onClick={() => setIsGroupFormOpen(true)}
+                  >
+                    + Add Group
+                  </button>
+                </div>
+                <GroupList groups={groups} onGroupSelect={handleGroupSelect} />
+              </>
+            ) : activeTab === 'settings' ? (
+              <Settings people={persons} groups={groups} />
+            ) : (
+              <>
+                <div className="section-header">
+                  <h2>People</h2>
+                  <button 
+                    className="add-button"
+                    onClick={() => setIsPersonFormOpen(true)}
+                  >
+                    + Add Person
+                  </button>
+                </div>
+                <PeopleList 
+                  people={persons} 
+                  onAddPerson={handleAddPerson}
+                  onDeletePerson={handleDeletePerson}
+                  onUpdatePerson={handleUpdatePerson}
+                  isAddFormOpen={isPersonFormOpen}
+                  onAddFormClose={() => setIsPersonFormOpen(false)}
+                />
+              </>
+            )}
+          </>
+        )}
+
+        {isPersonFormOpen && (
+          <PersonForm
+            onSubmit={handleAddPerson}
+            onCancel={() => setIsPersonFormOpen(false)}
+          />
+        )}
+
+        {isGroupFormOpen && (
+          <GroupForm
+            onClose={() => setIsGroupFormOpen(false)}
+            onSubmit={handleAddGroup}
+          />
+        )}
       </div>
-
-      {selectedGroup ? (
-        <GroupDetail 
-          group={selectedGroup} 
-          onClose={() => setSelectedGroup(null)}
-          onGroupUpdate={handleGroupUpdate}
-        />
-      ) : (
-        <>
-          {activeTab === 'groups' ? (
-            <>
-              <div className="section-header">
-                <h2>Groups</h2>
-                <button 
-                  className="add-button"
-                  onClick={() => setIsGroupFormOpen(true)}
-                >
-                  + Add Group
-                </button>
-              </div>
-              <GroupList groups={groups} onGroupSelect={handleGroupSelect} />
-            </>
-          ) : activeTab === 'settings' ? (
-            <Settings people={persons} groups={groups} />
-          ) : (
-            <>
-              <div className="section-header">
-                <h2>People</h2>
-                <button 
-                  className="add-button"
-                  onClick={() => setIsPersonFormOpen(true)}
-                >
-                  + Add Person
-                </button>
-              </div>
-              <PeopleList 
-                people={persons} 
-                onAddPerson={handleAddPerson}
-                onDeletePerson={handleDeletePerson}
-                onUpdatePerson={handleUpdatePerson}
-                isAddFormOpen={isPersonFormOpen}
-                onAddFormClose={() => setIsPersonFormOpen(false)}
-              />
-            </>
-          )}
-        </>
-      )}
-
-      {isPersonFormOpen && (
-        <PersonForm
-          onSubmit={handleAddPerson}
-          onCancel={() => setIsPersonFormOpen(false)}
-        />
-      )}
-
-      {isGroupFormOpen && (
-        <GroupForm
-          onClose={() => setIsGroupFormOpen(false)}
-          onSubmit={handleAddGroup}
-        />
-      )}
-    </div>
+    </ThemeProvider>
   )
 }
 

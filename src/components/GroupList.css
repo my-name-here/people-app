@@ -1,27 +1,60 @@
 .group-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  gap: 1rem;
   padding: 1rem;
 }
 
 .group-card {
-  background: white;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .group-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .group-card h3 {
   margin: 0 0 0.5rem 0;
-  color: #2c3e50;
+  color: var(--text-color);
+  font-size: 1.2rem;
+}
+
+.group-card p {
+  margin: 0;
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+.group-members {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.group-members h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.member-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.member-tag {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.9rem;
 }
 
 .group-card .description {

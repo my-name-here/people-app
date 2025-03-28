@@ -1,20 +1,90 @@
 .group-detail {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem auto;
   max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
 }
 
-.group-detail h2 {
-  margin-bottom: 0.5rem;
-}
-
-.group-detail .description {
-  color: #7f8c8d;
+.group-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   margin-bottom: 2rem;
+}
+
+.group-detail-header h2 {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+}
+
+.group-info {
+  margin-bottom: 2rem;
+}
+
+.group-info p {
+  color: var(--text-color);
+  line-height: 1.6;
+  margin: 0.5rem 0;
 }
 
 .members-section {
   margin-top: 2rem;
+}
+
+.members-section h3 {
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.members-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.member-card {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.member-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.member-info h4 {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.member-info p {
+  margin: 0.25rem 0;
+  color: var(--text-color);
+  font-size: 0.9rem;
 }
 
 .section-header {
@@ -44,37 +114,6 @@
 
 .add-member-button:hover {
   background-color: #27ae60;
-}
-
-.members-list {
-  display: grid;
-  gap: 1rem;
-}
-
-.member-card {
-  background: #f8f9fa;
-  border-radius: 6px;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.member-info h4 {
-  margin: 0 0 0.25rem 0;
-  color: #2c3e50;
-}
-
-.member-info .role {
-  color: #3498db;
-  margin: 0.25rem 0;
-  font-size: 0.9rem;
-}
-
-.member-info .organization {
-  color: #7f8c8d;
-  margin: 0.25rem 0 0 0;
-  font-size: 0.9rem;
 }
 
 .remove-member-button {

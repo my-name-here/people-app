@@ -43,46 +43,62 @@
 
 .app {
   min-height: 100vh;
-  background-color: #f5f6fa;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .app-header {
-  background-color: white;
+  background-color: var(--background-color);
   padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .app-header h1 {
   margin: 0;
-  color: #2c3e50;
-  font-size: 1.8rem;
+  color: var(--text-color);
 }
 
-.header-buttons {
+.app-nav {
   display: flex;
   gap: 1rem;
-  align-items: center;
+}
+
+.nav-button {
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.nav-button:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.1);
+}
+
+.nav-button.active {
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .add-button {
-  background-color: #2ecc71;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   transition: background-color 0.2s;
 }
 
 .add-button:hover {
-  background-color: #27ae60;
+  background-color: var(--primary-color-hover);
 }
 
 .logout-button {
@@ -148,13 +164,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .section-header h2 {
   margin: 0;
-  color: #2c3e50;
-  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.section-header h3 {
+  margin: 0;
+  color: var(--text-color);
 }
 
 .auth-container {
@@ -188,4 +208,62 @@
 
 .auth-switch button:hover {
   color: #2980b9;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--background-color);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Dark mode styles */
+:root {
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --primary-color: #007bff;
+  --primary-color-hover: #0056b3;
+  --primary-color-rgb: 0, 123, 255;
+}
+
+.dark-mode {
+  --background-color: #1a1a1a;
+  --text-color: #ffffff;
+  --border-color: #404040;
+  --primary-color: #4dabf7;
+  --primary-color-hover: #339af0;
+  --primary-color-rgb: 77, 171, 247;
+}
+
+.add-member-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.add-member-button:hover {
+  background-color: var(--primary-color-hover);
 }

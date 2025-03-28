@@ -1,9 +1,10 @@
 .person-card {
   position: relative;
-  background: white;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
   display: flex;
   gap: 1rem;
   align-items: flex-start;
@@ -46,8 +47,8 @@
 }
 
 .person-image {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -84,25 +85,22 @@
 
 .person-info {
   flex: 1;
-  min-width: 0;
+  text-align: left;
 }
 
 .person-info h3 {
   margin: 0 0 0.5rem 0;
-  font-size: 1.2rem;
-  color: #333;
+  color: var(--text-color);
 }
 
 .person-info p {
   margin: 0.25rem 0;
-  color: #666;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  color: var(--text-color);
 }
 
 .field-label {
-  font-weight: 600;
-  color: #444;
+  font-weight: 500;
+  color: var(--text-color);
   margin-right: 0.5rem;
 }
 
@@ -120,10 +118,9 @@
 }
 
 .notes {
+  color: var(--text-color);
   margin: 0;
-  color: #666;
-  font-size: 0.9rem;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .notes-content {
@@ -134,11 +131,11 @@
 .expand-notes-button {
   background: none;
   border: none;
-  color: #0066cc;
+  color: var(--primary-color);
+  cursor: pointer;
   padding: 0;
   font-size: 0.9rem;
-  cursor: pointer;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 }
 
 .expand-notes-button:hover {

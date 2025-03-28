@@ -1,6 +1,7 @@
 import React from 'react';
 import { Person } from '../types/Person';
 import { Group } from '../types/Group';
+import { useTheme } from '../contexts/ThemeContext';
 import './Settings.css';
 
 interface SettingsProps {
@@ -9,6 +10,8 @@ interface SettingsProps {
 }
 
 export const Settings: React.FC<SettingsProps> = ({ people, groups }) => {
+  const { theme, setTheme } = useTheme();
+
   const exportToJSON = (data: any, filename: string) => {
     // Convert data to JSON string with pretty formatting
     const jsonContent = JSON.stringify(data, null, 2);
@@ -65,6 +68,22 @@ export const Settings: React.FC<SettingsProps> = ({ people, groups }) => {
   return (
     <div className="settings-container">
       <h2>Settings</h2>
+      <div className="settings-section">
+        <h3>Appearance</h3>
+        <div className="theme-selector">
+          <label htmlFor="theme-select">Theme:</label>
+          <select
+            id="theme-select"
+            value={theme}
+            onChange={(e) => setTheme(e.target.value as 'light' | 'dark' | 'system')}
+            className="theme-dropdown"
+          >
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+            <option value="system">System Default</option>
+          </select>
+        </div>
+      </div>
       <div className="settings-section">
         <h3>Data Export</h3>
         <p>Export your data to JSON format for backup or analysis. The export includes all information needed to recreate your database.</p>

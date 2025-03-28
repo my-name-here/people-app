@@ -1,22 +1,20 @@
 .settings-container {
   max-width: 800px;
-  margin: 2rem auto;
+  margin: 0 auto;
   padding: 2rem;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .settings-container h2 {
+  color: var(--text-color);
   margin-bottom: 2rem;
-  color: #333;
-  font-size: 1.8rem;
 }
 
 .settings-section {
+  background: var(--background-color);
+  border-radius: 8px;
+  padding: 1.5rem;
   margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid #eee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .settings-section:last-child {
@@ -26,9 +24,10 @@
 }
 
 .settings-section h3 {
+  margin-top: 0;
+  color: var(--text-color);
+  font-size: 1.2rem;
   margin-bottom: 1rem;
-  color: #444;
-  font-size: 1.4rem;
 }
 
 .settings-section p {
@@ -37,36 +36,76 @@
   line-height: 1.5;
 }
 
+.theme-selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.theme-selector label {
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.theme-dropdown {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.theme-dropdown:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.theme-dropdown option {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
 .export-buttons {
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
+  margin-top: 1rem;
 }
 
 .export-button {
-  padding: 0.8rem 1.5rem;
-  background-color: #0066cc;
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.2s ease;
-}
-
-.export-button.primary {
-  background-color: #28a745;
-  font-weight: 600;
-}
-
-.export-button.primary:hover {
-  background-color: #218838;
+  transition: background-color 0.2s;
 }
 
 .export-button:hover {
-  background-color: #0052a3;
+  background-color: var(--primary-color-hover);
 }
 
-.export-button:active {
-  transform: translateY(1px);
+/* Dark mode styles */
+:root {
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --primary-color: #007bff;
+  --primary-color-hover: #0056b3;
+  --primary-color-rgb: 0, 123, 255;
+}
+
+.dark-mode {
+  --background-color: #1a1a1a;
+  --text-color: #ffffff;
+  --border-color: #404040;
+  --primary-color: #4dabf7;
+  --primary-color-hover: #339af0;
+  --primary-color-rgb: 77, 171, 247;
 } 
