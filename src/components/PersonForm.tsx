@@ -130,18 +130,17 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
         <div className="image-upload-container">
           <div className="image-preview">
             {formData.imageUrl ? (
-              <>
-                <img src={formData.imageUrl} alt="Profile Preview" />
-                <div className="placeholder-overlay click-to-upload">Click to upload</div>
-              </>
-            ) : (
-              <div className="placeholder-image click-to-upload">Click to upload</div>
-            )}
+              <img src={formData.imageUrl} alt="Profile Preview" style={{ opacity: 1 }} />
+            ) : null}
+            <div className="placeholder-overlay click-to-upload">Click to upload</div>
              <input
               type="file"
               id="imageUpload"
               onChange={handleImageUpload}
               className="file-input" />
+             {!formData.imageUrl && (
+              <div className="placeholder-image click-to-upload">Click to upload</div>
+            )}
           </div>
         </div>
       </div>
