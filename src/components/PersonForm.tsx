@@ -139,7 +139,9 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
               <img src={imagePreviewUrl} alt="Profile Preview" />
             ) : formData.name ? (
               <div className="placeholder-image">{formData.name.charAt(0).toUpperCase()}</div>
-            ) : null}
+            ) : (
+              <div className="placeholder-image click-to-upload">Click to upload</div>
+            )}
              <input
               type="file"
               id="imageUpload"
