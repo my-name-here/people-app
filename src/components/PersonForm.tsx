@@ -47,6 +47,9 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
 
   return (
     <form onSubmit={handleSubmit} className="person-form">
+      <button type="button" className="close-button" onClick={onCancel} aria-label="Close form">
+        ×
+      </button>
       <h2>{person ? 'Edit Person' : 'Add Person'}</h2>
       <div className="form-group">
         <label htmlFor="name">Name</label>
