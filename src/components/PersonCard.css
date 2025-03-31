@@ -140,4 +140,30 @@
 
 .expand-notes-button:hover {
   text-decoration: underline;
+}
+
+.groups-container {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.group-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.group-tag {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  display: inline-block;
+  transition: background-color 0.2s;
+}
+
+.group-tag:hover {
+  background-color: var(--primary-color-hover);
 } 

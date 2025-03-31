@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Person } from '../types/Person';
+import { Group } from '../types/Group';
 import './PersonCard.css';
 
 interface PersonCardProps {
   person: Person;
   onDelete: (id: string) => void;
   onEdit: (person: Person) => void;
+  groups: Group[];
 }
 
-export const PersonCard: React.FC<PersonCardProps> = ({ person, onDelete, onEdit }) => {
+export const PersonCard: React.FC<PersonCardProps> = ({ person, onDelete, onEdit, groups }) => {
   const [isNotesExpanded, setIsNotesExpanded] = useState(false);
   const [currentTime, setCurrentTime] = useState<string>('');
 
@@ -55,6 +57,8 @@ export const PersonCard: React.FC<PersonCardProps> = ({ person, onDelete, onEdit
     if (notes.length <= 100) return notes;
     return notes.substring(0, 100) + '...';
   };
+
+  const personGroups = groups.filter(group => group.personIds?.includes(person.id));
 
   return (
     <div className="person-card" onClick={handleClick}>
@@ -104,6 +108,17 @@ export const PersonCard: React.FC<PersonCardProps> = ({ person, onDelete, onEdit
                 {isNotesExpanded ? "Show less" : "Show more"}
               </button>
             )}
+          </div>
+        )}
+        {personGroups.length > 0 && (
+          <div className="groups-container">
+            <div className="group-tags">
+              {personGroups.map(group => (
+                <span key={group.id} className="group-tag">
+                  {group.name}
+                </span>
+              ))}
+            </div>
           </div>
         )}
       </div>

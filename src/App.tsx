@@ -26,6 +26,8 @@ function App() {
   const [password, setPassword] = useState('')
   const [isRegistering, setIsRegistering] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isAddFormOpen, setIsAddFormOpen] = useState(false)
+  const [editingPerson, setEditingPerson] = useState<Person | null>(null)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -54,16 +56,15 @@ function App() {
   }
 
   const handleAddPerson = async (person: Omit<Person, 'id' | 'dateAdded' | 'groupIds'>) => {
-    if (!user) return
     try {
-      const newPerson = await personService.addPerson(user.uid, person)
-      setPersons(prev => [...prev, newPerson])
-      setIsPersonFormOpen(false)
+      if (!user) return;
+      const newPerson = await personService.addPerson(user.uid, person);
+      setPersons(prev => [...prev, newPerson]);
+      setIsAddFormOpen(false);
     } catch (error) {
-      console.error('Error adding person:', error)
-      setError('Failed to add person. Please try again.')
+      console.error('Error adding person:', error);
     }
-  }
+  };
 
   const handleAddGroup = async (group: Omit<Group, 'id' | 'dateAdded' | 'personIds'>) => {
     if (!user) return
@@ -122,16 +123,19 @@ function App() {
     }
   };
 
-  const handleUpdatePerson = async (id: string, updatedPerson: Omit<Person, 'id'>) => {
-    if (!user) return;
+  const handleUpdatePerson = async (person: Omit<Person, 'id' | 'dateAdded' | 'groupIds'>) => {
     try {
-      const updated = await personService.updatePerson(id, updatedPerson);
-      setPersons(prev => prev.map(person => 
-        person.id === id ? updated : person
-      ));
+      if (editingPerson) {
+        const updatedPerson = await personService.updatePerson(editingPerson.id, {
+          ...person,
+          dateAdded: editingPerson.dateAdded,
+          groupIds: editingPerson.groupIds
+        });
+        setPersons(prev => prev.map(p => p.id === updatedPerson.id ? updatedPerson : p));
+        setEditingPerson(null);
+      }
     } catch (error) {
       console.error('Error updating person:', error);
-      setError('Failed to update person. Please try again.');
     }
   };
 
@@ -235,29 +239,45 @@ function App() {
                   <h2>People</h2>
                   <button 
                     className="add-button"
-                    onClick={() => setIsPersonFormOpen(true)}
+                    onClick={() => setIsAddFormOpen(true)}
                   >
                     + Add Person
                   </button>
                 </div>
                 <PeopleList 
                   people={persons} 
-                  onAddPerson={handleAddPerson}
+                  groups={groups}
                   onDeletePerson={handleDeletePerson}
-                  onUpdatePerson={handleUpdatePerson}
-                  isAddFormOpen={isPersonFormOpen}
-                  onAddFormClose={() => setIsPersonFormOpen(false)}
+                  onEditPerson={setEditingPerson}
+                  isAddFormOpen={isAddFormOpen}
+                  onAddFormClose={() => setIsAddFormOpen(false)}
                 />
               </>
             )}
           </>
         )}
 
-        {isPersonFormOpen && (
-          <PersonForm
-            onSubmit={handleAddPerson}
-            onCancel={() => setIsPersonFormOpen(false)}
-          />
+        {isAddFormOpen && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <PersonForm
+                onSubmit={handleAddPerson}
+                onCancel={() => setIsAddFormOpen(false)}
+              />
+            </div>
+          </div>
+        )}
+
+        {editingPerson && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <PersonForm
+                person={editingPerson}
+                onSubmit={handleUpdatePerson}
+                onCancel={() => setEditingPerson(null)}
+              />
+            </div>
+          </div>
         )}
 
         {isGroupFormOpen && (

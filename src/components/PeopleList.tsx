@@ -1,68 +1,81 @@
 import React, { useState } from 'react';
 import { Person } from '../types/Person';
+import { Group } from '../types/Group';
 import { PersonCard } from './PersonCard';
 import { PersonForm } from './PersonForm';
 import './PeopleList.css';
 
 interface PeopleListProps {
   people: Person[];
-  onAddPerson: (person: Omit<Person, 'id'>) => void;
+  groups: Group[];
   onDeletePerson: (id: string) => void;
-  onUpdatePerson: (id: string, person: Omit<Person, 'id'>) => void;
+  onEditPerson: (person: Person) => void;
   isAddFormOpen: boolean;
   onAddFormClose: () => void;
 }
 
-export const PeopleList: React.FC<PeopleListProps> = ({ 
-  people, 
-  onAddPerson, 
+export const PeopleList: React.FC<PeopleListProps> = ({
+  people,
+  groups,
   onDeletePerson,
-  onUpdatePerson,
+  onEditPerson,
   isAddFormOpen,
   onAddFormClose
 }) => {
   const [editingPerson, setEditingPerson] = useState<Person | null>(null);
 
-  const handleSubmit = async (person: Omit<Person, 'id' | 'createdAt' | 'updatedAt'>) => {
-    await onAddPerson(person);
-    onAddFormClose();
-  };
-
   const handleEdit = (person: Person) => {
     setEditingPerson(person);
   };
 
+  const handleSubmit = async (person: Omit<Person, 'id' | 'createdAt' | 'updatedAt'>) => {
+    await onAddFormClose();
+  };
+
   const handleEditSubmit = async (updatedPerson: Omit<Person, 'id' | 'createdAt' | 'updatedAt'>) => {
     if (editingPerson) {
-      await onUpdatePerson(editingPerson.id, updatedPerson);
+      const personWithId = {
+        ...updatedPerson,
+        id: editingPerson.id,
+        createdAt: editingPerson.createdAt,
+        updatedAt: editingPerson.updatedAt
+      };
+      await onEditPerson(personWithId);
       setEditingPerson(null);
     }
   };
 
   return (
     <div className="people-list">
-      <div className="people-grid">
-        {people.map(person => (
-          <PersonCard 
-            key={person.id} 
-            person={person}
-            onDelete={onDeletePerson}
-            onEdit={handleEdit}
-          />
-        ))}
-      </div>
-      {isAddFormOpen && (
-        <PersonForm 
-          onSubmit={handleSubmit} 
-          onCancel={onAddFormClose}
+      {people.map(person => (
+        <PersonCard
+          key={person.id}
+          person={person}
+          onDelete={onDeletePerson}
+          onEdit={handleEdit}
+          groups={groups}
         />
+      ))}
+      {isAddFormOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <PersonForm
+              onSubmit={handleSubmit}
+              onCancel={onAddFormClose}
+            />
+          </div>
+        </div>
       )}
       {editingPerson && (
-        <PersonForm
-          onSubmit={handleEditSubmit}
-          onCancel={() => setEditingPerson(null)}
-          initialData={editingPerson}
-        />
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <PersonForm
+              person={editingPerson}
+              onSubmit={handleEditSubmit}
+              onCancel={() => setEditingPerson(null)}
+            />
+          </div>
+        </div>
       )}
     </div>
   );
