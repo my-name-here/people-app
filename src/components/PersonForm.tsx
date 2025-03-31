@@ -139,7 +139,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
               onChange={handleImageUpload}
               className="file-input" />
              {!formData.profilePictureUrl && !formData.imageUrl  && (
-              <div className="placeholder-image click-to-upload">Click to upload</div>
+              <div className="placeholder-image"></div>
             )}
           </div>
         </div>
