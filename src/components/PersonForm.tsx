@@ -40,12 +40,6 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
     }
   }, [person]);
 
-  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(formData.imageUrl || formData.profilePictureUrl || null);
-
-  useEffect(() => {
-    setImagePreviewUrl(formData.imageUrl || formData.profilePictureUrl || null);
-  }, [formData.imageUrl, formData.profilePictureUrl]);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit({
@@ -135,18 +129,13 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
         <label htmlFor="imageUpload">Profile Picture</label>
         <div className="image-upload-container">
           <div className="image-preview">
-            {imagePreviewUrl ? (
-              <img src={imagePreviewUrl} alt="Profile Preview" />
-            ) : (
-              <div className="placeholder-image click-to-upload">Click to upload</div>
-            )}
+            <div className="placeholder-image click-to-upload">Click to upload</div>
              <input
               type="file"
               id="imageUpload"
               onChange={handleImageUpload}
               className="file-input" />
           </div>
-
         </div>
       </div>
       <div className="form-actions">
