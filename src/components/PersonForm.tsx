@@ -129,7 +129,14 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
         <label htmlFor="imageUpload">Profile Picture</label>
         <div className="image-upload-container">
           <div className="image-preview">
-            <div className="placeholder-image click-to-upload">Click to upload</div>
+            {formData.imageUrl ? (
+              <>
+                <img src={formData.imageUrl} alt="Profile Preview" />
+                <div className="placeholder-overlay click-to-upload">Click to upload</div>
+              </>
+            ) : (
+              <div className="placeholder-image click-to-upload">Click to upload</div>
+            )}
              <input
               type="file"
               id="imageUpload"

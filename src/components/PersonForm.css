@@ -146,13 +146,14 @@
   display: flex; /* Use flexbox to center the placeholder */
   align-items: center;
   justify-content: center;
-  position: relative; /* Needed for absolute positioning of file input */
+  position: relative; /* Needed for absolute positioning of file input and overlay */
 }
 
 .image-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 1; /* Ensure image is fully opaque */
 }
 
 .placeholder-image {
@@ -169,6 +170,23 @@
 .placeholder-image.click-to-upload {
   font-size: 1.2rem;
   color: #888;
+  text-align: center;
+  padding: 0 1rem;
+  line-height: 1.3;
+}
+
+.placeholder-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.25); /* Semi-transparent black background */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
   text-align: center;
   padding: 0 1rem;
   line-height: 1.3;
