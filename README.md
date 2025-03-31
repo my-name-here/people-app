@@ -11,3 +11,5 @@ The app is deployed at <link>, and this video shows it off <link>
 ## Prompting
 For a brief look of my prompting, take a look at [prompting.md](prompting.md)
 
+## Summary
+
