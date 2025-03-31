@@ -3,3 +3,6 @@
 It can be difficult to keep track of different information about people; this app attempts to give you a way to keep all the info in one place.
 
 
+## Try the App
+
+The app is deployed at <link>, and this video shows it off <link>
