@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Person } from '../types/Person';
+import { uploadImage } from '../config/cloudinary';
 import './PersonForm.css';
 
 interface PersonFormProps {
@@ -9,7 +10,7 @@ interface PersonFormProps {
 }
 
 export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCancel }) => {
-  const [formData, setFormData] = useState<Omit<Person, 'id' | 'dateAdded' | 'groupIds'>>({
+  const [formData, setFormData] = useState<Omit<Person, 'id' | 'dateAdded' | 'groupIds'> & { profilePictureUrl?: string }>({
     name: '',
     role: '',
     organization: '',
@@ -17,6 +18,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
     timezone: 'America/New_York',
     imageUrl: '',
     userId: '',
+    profilePictureUrl: '',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   });
@@ -31,11 +33,18 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
         timezone: person.timezone,
         imageUrl: person.imageUrl || '',
         userId: person.userId,
+        profilePictureUrl: person.profilePictureUrl || '',
         createdAt: person.createdAt,
         updatedAt: new Date().toISOString()
       });
     }
   }, [person]);
+
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(formData.imageUrl || formData.profilePictureUrl || null);
+
+  useEffect(() => {
+    setImagePreviewUrl(formData.imageUrl || formData.profilePictureUrl || null);
+  }, [formData.imageUrl, formData.profilePictureUrl]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +52,18 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
       ...formData,
       updatedAt: new Date().toISOString()
     });
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const imageUrl = await uploadImage(file);
+      setFormData({ ...formData, imageUrl: imageUrl, updatedAt: new Date().toISOString() });
+    } catch (error) {
+      console.error("Image upload failed:", error);
+    }
   };
 
   return (
@@ -111,13 +132,21 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
         </select>
       </div>
       <div className="form-group">
-        <label htmlFor="imageUrl">Profile Image URL</label>
-        <input
-          type="url"
-          id="imageUrl"
-          value={formData.imageUrl}
-          onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value, updatedAt: new Date().toISOString() })}
-        />
+        <label htmlFor="imageUpload">Profile Picture</label>
+        <div className="image-upload-container">
+          <div className="image-preview">
+            {imagePreviewUrl ? (
+              <img src={imagePreviewUrl} alt="Profile Preview" />
+            ) : formData.name ? (
+              <div className="placeholder-image">{formData.name.charAt(0).toUpperCase()}</div>
+            ) : null}
+          </div>
+          <input
+            type="file"
+            id="imageUpload"
+            onChange={handleImageUpload}
+            className="file-input" />
+        </div>
       </div>
       <div className="form-actions">
         <button type="submit" className="submit-button">
@@ -129,4 +158,4 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
       </div>
     </form>
   );
-}; 
+};

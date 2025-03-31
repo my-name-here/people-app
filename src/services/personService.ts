@@ -1,4 +1,4 @@
-import { 
+import {
   collection,
   addDoc,
   query,
@@ -16,14 +16,14 @@ import { Person } from '../types/Person';
 const COLLECTION_NAME = 'persons';
 
 export const personService = {
-  async addPerson(userId: string, person: Omit<Person, 'id' | 'dateAdded' | 'groupIds'>): Promise<Person> {
+  async addPerson(userId: string, person: Omit<Person, 'id' | 'dateAdded' | 'groupIds' | 'profilePictureUrl'>): Promise<Person> {
     const docRef = await addDoc(collection(db, COLLECTION_NAME), {
       ...person,
       userId,
       dateAdded: serverTimestamp(),
       groupIds: []
     });
-    
+
     return {
       id: docRef.id,
       ...person,
@@ -53,7 +53,7 @@ export const personService = {
     await deleteDoc(doc(db, COLLECTION_NAME, personId));
   },
 
-  async updatePerson(id: string, person: Omit<Person, 'id'>): Promise<Person> {
+  async updatePerson(id: string, person: Omit<Person, 'id' | 'profilePictureUrl'>): Promise<Person> {
     const docRef = doc(db, COLLECTION_NAME, id);
     await updateDoc(docRef, person);
     return {
@@ -61,4 +61,4 @@ export const personService = {
       ...person
     };
   }
-}; 
+};

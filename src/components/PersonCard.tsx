@@ -66,8 +66,10 @@ export const PersonCard: React.FC<PersonCardProps> = ({ person, onDelete, onEdit
         ×
       </button>
       <div className="person-image">
-        {(person.imageUrl || (person as any).profilePictureUrl) ? (
-          <img src={person.imageUrl || (person as any).profilePictureUrl} alt={person.name} />
+        {person.profilePictureUrl ? (
+          <img src={person.profilePictureUrl} alt={person.name} />
+        ) : person.imageUrl ? (
+          <img src={person.imageUrl} alt={person.name} />
         ) : (
           <div className="placeholder-image">
             {person.name.charAt(0).toUpperCase()}
@@ -100,8 +102,8 @@ export const PersonCard: React.FC<PersonCardProps> = ({ person, onDelete, onEdit
               </span>
             </p>
             {person.notes.length > 100 && (
-              <button 
-                className="expand-notes-button" 
+              <button
+                className="expand-notes-button"
                 onClick={handleNotesClick}
                 aria-label={isNotesExpanded ? "Show less" : "Show more"}
               >
@@ -124,4 +126,4 @@ export const PersonCard: React.FC<PersonCardProps> = ({ person, onDelete, onEdit
       </div>
     </div>
   );
-}; 
+};

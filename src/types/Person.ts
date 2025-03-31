@@ -6,9 +6,10 @@ export interface Person {
   notes?: string;
   timezone: string;
   imageUrl?: string;
+  profilePictureUrl?: string;
   dateAdded: string;
   createdAt: string;
   updatedAt: string;
   groupIds: string[];
   userId: string;
-} 
+}
