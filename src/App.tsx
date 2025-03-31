@@ -184,7 +184,6 @@ function App() {
       <div className="app">
         <header className="app-header">
           <h1>Research People Tracker</h1>
-          <button onClick={handleLogout} className="logout-button">Logout</button>
         </header>
 
         {error && <div className="error-message">{error}</div>}
@@ -207,6 +206,12 @@ function App() {
             onClick={() => setActiveTab('settings')}
           >
             Settings
+          </button>
+          <button 
+            className="tab-button logout-tab"
+            onClick={handleLogout}
+          >
+            Logout
           </button>
         </div>
 
