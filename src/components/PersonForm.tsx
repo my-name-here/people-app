@@ -10,7 +10,7 @@ interface PersonFormProps {
 }
 
 export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCancel }) => {
-  const [formData, setFormData] = useState<Omit<Person, 'id' | 'dateAdded' | 'groupIds'> & { profilePictureUrl?: string }>({
+  const [formData, setFormData] = useState<Omit<Person, 'id' | 'dateAdded' | 'groupIds'> & { profilePictureUrl?: string, imageUrl?: string }>({
     name: '',
     role: '',
     organization: '',
@@ -54,7 +54,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
 
     try {
       const imageUrl = await uploadImage(file);
-      setFormData({ ...formData, imageUrl: imageUrl, updatedAt: new Date().toISOString() });
+      setFormData({ ...formData, imageUrl: imageUrl, profilePictureUrl: imageUrl, updatedAt: new Date().toISOString() });
     } catch (error) {
       console.error("Image upload failed:", error);
     }
@@ -129,8 +129,8 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
         <label htmlFor="imageUpload">Profile Picture</label>
         <div className="image-upload-container">
           <div className="image-preview">
-            {formData.imageUrl ? (
-              <img src={formData.imageUrl} alt="Profile Preview" style={{ opacity: 1 }} />
+            {formData.profilePictureUrl || formData.imageUrl ? (
+              <img src={formData.profilePictureUrl || formData.imageUrl} alt="Profile Preview" style={{ opacity: 1 }} />
             ) : null}
             <div className="placeholder-overlay click-to-upload">Click to upload</div>
              <input
@@ -138,7 +138,7 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
               id="imageUpload"
               onChange={handleImageUpload}
               className="file-input" />
-             {!formData.imageUrl && (
+             {!formData.profilePictureUrl && !formData.imageUrl  && (
               <div className="placeholder-image click-to-upload">Click to upload</div>
             )}
           </div>
