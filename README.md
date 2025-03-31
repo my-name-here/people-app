@@ -28,6 +28,7 @@ The final app is a person information tracker, with the ability to add people in
 - Cursor completely removed my image upload feature, and I had to prompt it to add it back last minute
 - I had to do multiple iterations for some features to get them to work, or fix newly introduced problems.
 - For some prompts, I needed to regenerate a few times, while refining the prompt, to get something I was happy with.
+- Cursor required upgrading my account to continue after a while, with the profile pictures upload still broken. I had to go to aider in order to fix it.
 
 
 Overall, this project helped me build a full-stack app with limited web development experience. Cursor ended up being a powerful tool, simplifying some of the developmenet process. While it worked well with some limitations, in the future, I feel like I am more likely to use other tools instead, such as Aider or Google's AI Studio.
