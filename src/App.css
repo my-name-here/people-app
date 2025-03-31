@@ -36,9 +36,10 @@
 }
 
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
@@ -82,15 +83,20 @@
   min-height: 100vh;
   background-color: var(--background-color);
   color: var(--text-color);
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .app-header {
   background-color: var(--background-color);
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border-color);
+  width: 100%;
 }
 
 .app-header h1 {
@@ -155,9 +161,8 @@
 }
 
 .app-main {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  padding: 2rem 0;
+  width: 100%;
 }
 
 .tabs {
@@ -243,12 +248,65 @@
   justify-content: center;
   min-height: 100vh;
   background-color: var(--background-color);
-  padding: 1rem;
+  padding: 2rem 0;
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.auth-container form {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.auth-container .form-group {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.auth-container .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  text-align: left;
+}
+
+.auth-container .form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: var(--input-background);
+  color: var(--text-color);
+}
+
+.auth-container .form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--primary-color-light);
+}
+
+.auth-container .submit-button {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 1rem;
+}
+
+.auth-container h2 {
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  font-size: 2rem;
 }
 
 .auth-switch {
   margin-top: 1rem;
   text-align: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 2rem;
 }
 
 .auth-switch p {
@@ -288,7 +346,8 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   max-width: 500px;
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   border: 1px solid var(--border-color);
 }
 
