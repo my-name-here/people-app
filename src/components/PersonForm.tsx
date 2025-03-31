@@ -140,12 +140,13 @@ export const PersonForm: React.FC<PersonFormProps> = ({ person, onSubmit, onCanc
             ) : formData.name ? (
               <div className="placeholder-image">{formData.name.charAt(0).toUpperCase()}</div>
             ) : null}
+             <input
+              type="file"
+              id="imageUpload"
+              onChange={handleImageUpload}
+              className="file-input" />
           </div>
-          <input
-            type="file"
-            id="imageUpload"
-            onChange={handleImageUpload}
-            className="file-input" />
+
         </div>
       </div>
       <div className="form-actions">
