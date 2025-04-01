@@ -125,7 +125,8 @@ function App() {
   const handleUpdatePerson = async (person: Omit<Person, 'id' | 'dateAdded' | 'groupIds'>) => {
     try {
       if (editingPerson) {
-        const updatedPerson = await personService.updatePerson(editingPerson.id, person);
+        // Corrected line: Casting 'person' to the expected type for personService.updatePerson
+        const updatedPerson = await personService.updatePerson(editingPerson.id, person as Omit<Person, 'id' | 'profilePictureUrl'>);
         setPersons(prev => prev.map(p => p.id === updatedPerson.id ? updatedPerson : p));
         setEditingPerson(null);
       }
