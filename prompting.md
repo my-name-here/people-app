@@ -355,3 +355,35 @@ Instead of having every  page take up 100% of the width of the window, can you m
 
 This did what I wanted, and made it a more reasonable size.
 
+#### Aider prompt after cursor stopped working
+
+(Cursor required pro subscription to continue, so used aider for this)  
+Prompt:  
+ /architect It seems like you removed uploading profile pictures  to Cloudinary that was in here at some point, and replaced it with just links to the images. please put the image upload back. Remember, the link will be needed for the  json export, but for the add person form and edit person form, you should just upload images, with the link stuff behind the scenes. In the edit form, if there is a profile picture already, you should show it, loading from the stored link, but also allow for uploading a different one if the user clicks on the profile picture image. The image should be within a circle. if no profile picture is uploaded, a placeholder of the first letter of their name should be used
+
+This fixed the profile picture stuff, but made it so clicking anywhere on the add person page brought up the upload menu. I attempted to fix this using the prompt:
+
+ /architect that fixed the profile picture upload, but now clicking anywhere on the add person and edit person forms brings up the file upload menu, rather than just when clicking on the profile picture image. This is a problem, because it prevents clicking on other parts of the form, and should be fixed.  
+                              
+This fixed it, but there was no message about click to upload on the empty circle in the add person form. I used the prompt:  
+ /architect if the circle on the add person form that holds the profile picture is blank, the circle should have the text “click to upload” within it. This ensures that it is clear to the user how to upload an image when creating a new user.
+
+This worked, now I want the profile pictures in the edit form  to have a click to upload as well. I still want the image to appear in the people list, but in the edit form, it should have the click to upload text, like in the add person form. I used the prompt:  
+ /architect now I want the profile pictures in the edit form  to have a click to upload  text as well. I still want the image to appear in the people list, but in the edit form, it should have the  click to upload text, like in the add person form.
+
+This worked when there was no existing profile picture, but for existing profile pictures, the existing image was shown in the edit form, rather than the click to upload text. I tried the prompt:  
+ /architect  while this worked for the placeholder images with just the single letter, if there was an existing profile picture, that was shown in the edit form, rather than the click to upload text that was expected. Remember, I don’t want to change how the profile pictures are displayed in the people list, just how they show up in the edit profile form.
+
+This worked as intended, though I would prefer it if for existing images, it had the click to upload text overlaid on the existing image, instead of replacing it in the edit form. To do this, i tried a prompt of:  
+ /architect  ok, that worked, but I would prefer it if, when there was an existing image, that image would be shown in the edit person form, but with the click to upload text overlaid on it. It should have enough contrast to be readable,  perhaps by slightly dimming the existing image, and putting a slightly transparent background on the click to upload text. If there is just a single letter placeholder, indicating no profile was uploaded, then there should be no change from the current behavior. This means you should ensure that the profile picture placeholders remain as circle images, and are placed the same as the profile pictures that are uploaded. You should probably have a separate condition for if there is a image url  for a person in the person list, and if there isn’t one, to handle this properly. In other words, in the edit form, you should always have a click to upload text, but if there is an existing image url, you should display that image, with the click to upload text as an overlay, with a background that is semitransparent, to help ensure readability of the text. The opacity of the overlay should be around 25%, while the opacity of the existing images that the overlay is added to should be 100%. The single letter placeholder profile images should have the letter centered in the circle, and relatively large. Remember that the single letter placeholder images should not be visible in the edit person form, but the normal, uploaded images with an image url should be shown, behind the overlay.
+
+This fixed it somewhat, but didn’t account for `profilePictureUrl and imageUrl both having the possibility of holding the profile picture. To fix this, I used the prompt:`  
+ /architect while that partially works, the db has the profile pictures stored either in `profilePictureUrl or imageUrl, depending on when it was added. You should adjust the code to account for this.`
+
+That fixed it, though the placeholder images have the overlay put on an image with the click to upload text.  
+I tried the prompt   
+ /architect in the edit form, if we had a placeholder image for the profile picture, instead of a url, we show an image that has the text click to upload, and put an overlay with the same text over it. Instead, for consistency, we should show a blank image, and put the overlay over it.
+
+Running locally with npm run dev worked fine, but npm run build had build errors, preventing building on Vercel. I fixed this using aider, with /run npm run build, which added the command output to chat context, then used the default prompt of:  
+What's wrong? Fix   
+This ended up fixing 7 of the 8 build errors the first time, so I did it again, and it fixed the remaining build errors.  
