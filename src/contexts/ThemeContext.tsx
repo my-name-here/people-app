@@ -27,7 +27,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
-    const root = window.document.documentElement;
     const systemDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     if (theme === 'system') {
@@ -49,11 +48,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [theme]);
 
   useEffect(() => {
-    const root = window.document.documentElement;
     if (isDarkMode) {
-      root.classList.add('dark-mode');
+      window.document.documentElement.classList.add('dark-mode'); // Directly use documentElement
     } else {
-      root.classList.remove('dark-mode');
+      window.document.documentElement.classList.remove('dark-mode'); // Directly use documentElement
     }
   }, [isDarkMode]);
 
@@ -66,4 +64,4 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       {children}
     </ThemeContext.Provider>
   );
-}; 
+};

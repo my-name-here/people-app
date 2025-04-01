@@ -18,7 +18,6 @@ function App() {
   const [user, setUser] = useState(auth.currentUser)
   const [persons, setPersons] = useState<Person[]>([])
   const [groups, setGroups] = useState<Group[]>([])
-  const [isPersonFormOpen, setIsPersonFormOpen] = useState(false)
   const [isGroupFormOpen, setIsGroupFormOpen] = useState(false)
   const [selectedGroup, setSelectedGroup] = useState<Group | null>(null)
   const [activeTab, setActiveTab] = useState<'people' | 'groups' | 'settings'>('people')
@@ -83,7 +82,7 @@ function App() {
   }
 
   const handleGroupUpdate = (updatedGroup: Group) => {
-    setGroups(prev => prev.map(group => 
+    setGroups(prev => prev.map(group =>
       group.id === updatedGroup.id ? updatedGroup : group
     ))
   }
@@ -126,11 +125,7 @@ function App() {
   const handleUpdatePerson = async (person: Omit<Person, 'id' | 'dateAdded' | 'groupIds'>) => {
     try {
       if (editingPerson) {
-        const updatedPerson = await personService.updatePerson(editingPerson.id, {
-          ...person,
-          dateAdded: editingPerson.dateAdded,
-          groupIds: editingPerson.groupIds
-        });
+        const updatedPerson = await personService.updatePerson(editingPerson.id, person);
         setPersons(prev => prev.map(p => p.id === updatedPerson.id ? updatedPerson : p));
         setEditingPerson(null);
       }
@@ -169,7 +164,7 @@ function App() {
             {isRegistering ? 'Register' : 'Login'}
           </button>
         </form>
-        <button 
+        <button
           className="auth-switch"
           onClick={() => setIsRegistering(!isRegistering)}
         >
@@ -189,25 +184,25 @@ function App() {
         {error && <div className="error-message">{error}</div>}
 
         <div className="tabs">
-          <button 
+          <button
             className={`tab-button ${activeTab === 'people' ? 'active' : ''}`}
             onClick={() => setActiveTab('people')}
           >
             People
           </button>
-          <button 
+          <button
             className={`tab-button ${activeTab === 'groups' ? 'active' : ''}`}
             onClick={() => setActiveTab('groups')}
           >
             Groups
           </button>
-          <button 
+          <button
             className={`tab-button ${activeTab === 'settings' ? 'active' : ''}`}
             onClick={() => setActiveTab('settings')}
           >
             Settings
           </button>
-          <button 
+          <button
             className="tab-button logout-tab"
             onClick={handleLogout}
           >
@@ -216,8 +211,8 @@ function App() {
         </div>
 
         {selectedGroup ? (
-          <GroupDetail 
-            group={selectedGroup} 
+          <GroupDetail
+            group={selectedGroup}
             onClose={() => setSelectedGroup(null)}
             onGroupUpdate={handleGroupUpdate}
           />
@@ -227,7 +222,7 @@ function App() {
               <>
                 <div className="section-header">
                   <h2>Groups</h2>
-                  <button 
+                  <button
                     className="add-button"
                     onClick={() => setIsGroupFormOpen(true)}
                   >
@@ -242,15 +237,15 @@ function App() {
               <>
                 <div className="section-header">
                   <h2>People</h2>
-                  <button 
+                  <button
                     className="add-button"
                     onClick={() => setIsAddFormOpen(true)}
                   >
                     + Add Person
                   </button>
                 </div>
-                <PeopleList 
-                  people={persons} 
+                <PeopleList
+                  people={persons}
                   groups={groups}
                   onDeletePerson={handleDeletePerson}
                   onEditPerson={setEditingPerson}

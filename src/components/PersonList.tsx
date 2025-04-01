@@ -61,16 +61,16 @@ export const PersonList: React.FC<PersonListProps> = ({ persons }) => {
                 <div className="info-row">
                   <span className="info-label">Notes:</span>
                   <div className="notes-container">
-                    <div 
+                    <div
                       ref={el => { notesRefs.current[person.id] = el; }}
                       className="info-value notes-value"
                     >
                       {person.notes}
                     </div>
                     {truncatedNotes.has(person.id) && (
-                      <button 
+                      <button
                         className="show-more-button"
-                        onClick={() => setSelectedNotes(person.notes)}
+                        onClick={() => setSelectedNotes(person.notes ?? null)} // Using nullish coalescing operator
                       >
                         Show More
                       </button>
@@ -90,4 +90,4 @@ export const PersonList: React.FC<PersonListProps> = ({ persons }) => {
       )}
     </>
   );
-}; 
+};

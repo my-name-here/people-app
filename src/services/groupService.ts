@@ -1,4 +1,4 @@
-import { 
+import {
   collection,
   addDoc,
   query,
@@ -13,7 +13,6 @@ import {
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { Group } from '../types/Group';
-import { personService } from './personService';
 
 const COLLECTION_NAME = 'groups';
 
@@ -25,7 +24,7 @@ export const groupService = {
       dateAdded: new Date().toISOString(),
       personIds: []
     });
-    
+
     return {
       ...group,
       id: docRef.id,
@@ -64,7 +63,7 @@ export const groupService = {
   async addPersonToGroup(groupId: string, personId: string): Promise<void> {
     const groupRef = doc(db, COLLECTION_NAME, groupId);
     const group = await this.getGroup(groupId);
-    
+
     if (!group) {
       throw new Error('Group not found');
     }
@@ -85,4 +84,4 @@ export const groupService = {
       personIds: arrayRemove(personId)
     });
   }
-}; 
+};

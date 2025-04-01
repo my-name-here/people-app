@@ -28,17 +28,17 @@ export const PeopleList: React.FC<PeopleListProps> = ({
     setEditingPerson(person);
   };
 
-  const handleSubmit = async (person: Omit<Person, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const handleSubmit = async () => { // Removed unused 'person' parameter
     await onAddFormClose();
   };
 
-  const handleEditSubmit = async (updatedPerson: Omit<Person, 'id' | 'createdAt' | 'updatedAt'>) => {
+  const handleEditSubmit = async (updatedPerson: Omit<Person, 'id' | 'dateAdded' | 'groupIds'>) => {
     if (editingPerson) {
       const personWithId = {
         ...updatedPerson,
         id: editingPerson.id,
-        createdAt: editingPerson.createdAt,
-        updatedAt: editingPerson.updatedAt
+        dateAdded: editingPerson.dateAdded,
+        groupIds: editingPerson.groupIds
       };
       await onEditPerson(personWithId);
       setEditingPerson(null);
@@ -79,4 +79,4 @@ export const PeopleList: React.FC<PeopleListProps> = ({
       )}
     </div>
   );
-}; 
+};
