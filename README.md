@@ -5,7 +5,7 @@ It can be difficult to keep track of different information about people; this ap
 
 ## Try the App
 
-The app is deployed at [https://people-app-beige.vercel.app](https://people-app-beige.vercel.app), and this video shows it off <link>
+The app is deployed at [https://people-app-beige.vercel.app](https://people-app-beige.vercel.app), and this video shows it off [video Link](https://drive.google.com/file/d/16WpbZl3-sNuLmt1u8yWCVeZ5S2SoHAKt/view?usp=sharing)
 
 
 ## Prompting
